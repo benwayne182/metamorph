@@ -1,0 +1,63 @@
+#launch the simulation of Romeo or HRP-2 with pinocchio
+#------------START---------------------------
+#-----Launch the Gepetto Viewer server-------
+cd /home/bsinivas/devel/pinocchio/gepetto-viewer-corba/_build/bin
+./gepetto-viewer-server
+
+#------Python script-------------------------
+#python ~/Documents/memos/script.py #obsolete
+cd ~/Documents/memos/
+ipython #launching ipython
+#-----dans ipython-----------------
+#---launching the script----
+execfile("script_hrp2.py")#hrp2
+#execfile("script_romeo.py")#romeo
+
+#-----show the positions of the joints---
+q
+
+#-------get the list of the jonts----------
+for n in robot.model.names:
+print n #root @ ligne 6
+
+#-------moving the robot joints--------------
+for i in range(100):
+    q[7:] +=qdot[6:]*dt #------moving the left arm around the shoulder-----
+    robot.display(q)
+
+#----Integration in SE3-----#
+#N=1000                     #
+#v = zero(3); v[2] = 1.0 / N#
+#w = zero(3); w[1] = 1.0 / N#
+#nu = se3.Motion( v, w )    #
+#M = se3.SE3.Identity()     #
+#---------------------------#
+
+#-----creating a motion from a real-valued geometric task---
+xdes = 3.0
+for i in range(1000):
+Mrh = robot.Mrh(q)
+e = Mrh.translation[0,0] - xdes
+J = Mrh.rotation * robot.Jrh(q)[:3,:]
+J = J[0,:]
+qdot = -J.T*e
+robot.increment(q,qdot*1e-2)
+robot.display(q)
+
+#-----creating a motion from a vector-valued geometric task---
+xdes = np.matrix([3.0,1.0,2.0]).T
+for i in range(1000):
+Mrh = robot.Mrh(q)
+e = Mrh.translation[0,0] - xdes
+J = Mrh.rotation * robot.Jrh(q)[:3,:]
+qdot = -npl.pinv(J)*e
+robot.increment(q,qdot*1e-2)
+robot.display(q)
+
+#-----------------------------------------
+roscore
+roslaunch hrp2_bringup geometric_simu.launch
+rosrun rviz rviz
+
+
+

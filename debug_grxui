@@ -1,0 +1,14 @@
+#debug GrxUI
+cd /opt/grx/HRP2LAAS/bin
+source config.sh
+/opt/grx/bin/openhrp-aist-dynamics-simulator -ORBInitRef NameService=corbaloc:iiop:localhost:2809/NameService
+------------------------------------------------------------
+ps aux | grep openhrp-aist-dynamics-simulator #verifier correspondance avec ligne 3 & checker le numero du process lancé ligne 3
+
+sudo su 
+gdb /opt/grx/bin/openhrp-aist-dynamics-simulator -p 13821 #numero du proces trouvé ligne 6 #lancer en root
+#dans gdb
+break /home/bsinivas/OpenHRP-3.1.4_source/hrplib/hrpModel/Body.cpp:671 #numero de ligne pour placer un breakpoint
+cont
+#lancer GrxUI.sh et lancer simulation
+
