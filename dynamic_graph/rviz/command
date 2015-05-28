@@ -1,7 +1,7 @@
 #simulation of HRP-2 using ros and rviz
 roscore
-rosrun rviz rviz #add a RobotModel to create a visualization
-roslaunch hrp2_bringup geometric_simu.launch
+rosrun rviz rviz
+roslaunch hrp2_bringup geometric_simu.launch #add a RobotModel to create a visualization
 rosrun dynamic_graph_bridge run_command
 
 #launch commands of script.py
