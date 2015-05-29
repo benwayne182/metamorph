@@ -30,10 +30,13 @@ echo "Launching Controller"
 terminal.extend(['--tab-with-profile=HoldOnExit', '-e','''
 bash -c '
 echo "Initialize the connection between the sot and the OpenRTM"
-sleep 5
-/opt/grx/HRP2LAAS/script/mnaveau/sot_max.py
+sleep 10
+/opt/grx/HRP2LAAS/script/sot.py
+
 '
 ''' % locals(), '-t', '''sot.py'''])
+#/opt/grx/HRP2LAAS/script/bsinivas/sot_ben.py
+#/opt/grx/HRP2LAAS/script/sot.py
 
 # Start dynamic_graph_bridge run_command terminal
 terminal.extend(['--tab-with-profile=HoldOnExit', '-e','''
@@ -42,7 +45,6 @@ echo "run command :"
 rosrun dynamic_graph_bridge run_command
 '
 ''' % locals(), '-t', '''Run Command'''])
-
 
 # Set the size of the terminal
 terminal.extend(['''--geometry=195x50+0+0'''])
