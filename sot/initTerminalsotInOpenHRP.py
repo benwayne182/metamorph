@@ -30,12 +30,12 @@ echo "Launching Controller"
 terminal.extend(['--tab-with-profile=HoldOnExit', '-e','''
 bash -c '
 echo "Initialize the connection between the sot and the OpenRTM"
-sleep 10
-/opt/grx/HRP2LAAS/script/sot.py
+sleep 5
+/opt/grx/HRP2LAAS/script/sot_ben.py
 
 '
 ''' % locals(), '-t', '''sot.py'''])
-#/opt/grx/HRP2LAAS/script/bsinivas/sot_ben.py
+#/opt/grx/HRP2LAAS/script/sot_ben.py
 #/opt/grx/HRP2LAAS/script/sot.py
 
 # Start dynamic_graph_bridge run_command terminal
