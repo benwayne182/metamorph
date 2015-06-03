@@ -7,3 +7,7 @@ rosrun dynamic_graph_bridge run_command
 #launch commands of script.py
 
 rosservice call /start_dynamic_graph
+
+#using rosrun
+
+rosrun launching_sot launchingSot.py
