@@ -15,7 +15,7 @@ walkFewSteps(robot)
 from dynamic_graph.sot.core.meta_tasks import generic6dReference, Task, GainAdaptive
 from dynamic_graph.sot.core.matrix_util import matrixToTuple
 from dynamic_graph import plug
-from numpy import pi
+from numpy import *
 
 
 #show tasks in solver controling the robot
@@ -66,5 +66,22 @@ appli.features['right-ankle'].reference.value = matrixToTuple(generic6dReference
 
 #retirer tache du solver
 appli.solver.sot.remove('trunk-task')
+
+
+
+#test seqplay
+#/home/bsinivas/devel/ros_unstable/src/sot/sot-tools/src/seqplay.cc
+
+from dynamic_graph.sot.tools import Seqplay
+seqplay=Seqplay('seqplay')
+
+
+#test oscillator
+#/home/bsinivas/devel/ros_unstable/src/sot/sot-tools/src/oscillator.cc
+from dynamic_graph.sot.tools import Oscillator
+
+appli.initOscillator()
+
+
 
 
